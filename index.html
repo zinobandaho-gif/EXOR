@@ -1,0 +1,873 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<!-- ============================================================
+  EXOR PARFUM — 001: document head
+============================================================= -->
+<meta charset="UTF-8" />
+<!-- 002: viewport for mobile precision -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- 003: title -->
+<title>EXOR — Smell Like The Ocean</title>
+<!-- 004: description -->
+<meta name="description" content="EXOR luxury marine perfume. Fresh by day, dangerous by night. 12h that turns heads." />
+<!-- 005: theme color day -->
+<meta name="theme-color" content="#1292c1" />
+<!-- 006: open graph -->
+<meta property="og:title" content="EXOR — Smell Like The Ocean" />
+<!-- 007 -->
+<meta property="og:description" content="One spray, they remember you." />
+<!-- 008 -->
+<meta property="og:type" content="website" />
+<!-- 009: twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<!-- 010: favicon inline -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%2300b8cc'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='serif'%3EE%3C/text%3E%3C/svg%3E" />
+<!-- 011: fonts preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<!-- 012 -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- 013: perfume fonts — Marcellus + Cormorant + Jost + Fascinate wavy -->
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500;600&family=Cinzel:wght@700;900&family=Fascinate+Inline&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   EXOR — STYLE INDEX (مرتب حسب الأقسام، لا تخلط بينها)
+   01 TOKENS + THEMES (day/night variables)
+   02 BASE (reset, body, grain)
+   03 SKY (sun, moon, stars canvas, drops canvas)
+   04 HEADER + THEME SWITCH
+   05 HERO LAYOUT (mega title + stage + reviews + CTA)
+   06 BOTTLE (movable tilt box)
+   07 REVIEWS + CTA BUTTONS (day + night)
+   08 SEA + MARQUEE + FOOTER + EFFECTS
+   09 DAY THEME OVERRIDES
+   10 NIGHT THEME OVERRIDES
+   11 RESPONSIVE (must stay LAST so it wins)
+   12 MOTION SAFETY
+   13 SPOTLIGHT + TITLE FLASH + MAGNETIC CTA
+   Images live next to index.html (exorlight, exornight, LIGHT, moon)
+============================================================ */
+/* ============================================================
+  014-120: TOKENS + THEMES
+============================================================= */
+/* 014: root */
+:root{
+  /* 015: font stacks */
+  --serif:"Marcellus",serif;
+  /* 016 */
+  --it:"Cormorant Garamond",serif;
+  /* 017 */
+  --sans:"Jost",system-ui,sans-serif;
+  /* 018 */
+  --wavy:"Cinzel",serif;
+  /* 019: shape + motion */
+  --r:22px;
+  /* 020 */
+  --tr:.8s cubic-bezier(.22,1,.36,1);
+  /* 021 */
+  --fast:.35s cubic-bezier(.22,1,.36,1);
+  /* 022: layout */
+  --max:1220px;
+  /* 023: shadows */
+  --sh1:0 14px 30px rgba(0,0,0,.28);
+  /* 024 */
+  --sh2:0 20px 50px rgba(0,0,0,.30);
+}
+/* 025: DAY theme — Figma light blue */
+body[data-theme="day"]{
+  /* 026: Figma gradient — near-white top to cyan bottom */
+  --bg1:#f2fbff;
+  /* 027 */
+  --bg2:#c9eafb;
+  /* 028 */
+  --bg3:#7bd5f2;
+  /* 029 */
+  --deep:#4fc4ee;
+  /* 030: ink — pure black text like Figma */
+  --ink:#000000;
+  /* 031 */
+  --muted:#33414b;
+  /* 032: glass */
+  --card:rgba(255,255,255,.70);
+  /* 033 */
+  --line:rgba(255,255,255,.90);
+  /* 034: brand */
+  --gold:#000000;
+  /* 035 */
+  --gold2:#000000;
+  /* 036 */
+  --aqua:#1f9ac8;
+  /* 037: halo + wave + flags */
+  --halo:radial-gradient(circle,rgba(255,252,230,.95) 0%,#ffdf7e 18%,rgba(0,184,204,.35) 52%,transparent 70%);
+  /* 038 */
+  --wave:#fdfefe;
+  /* 039 */
+  --sand:0;
+  /* 040 */
+  --stars:0;
+  /* 041 */
+  --glow:rgba(255,255,255,.60);
+}
+/* DAY clean background — Figma flat light-blue */
+body[data-theme="day"]{
+  background:linear-gradient(180deg,#f4fcff 0%,#d3eefb 34%,#a5ddf5 62%,#5fcdf1 100%);
+}
+/* 042: NIGHT theme — Figma pure black */
+body[data-theme="night"]{
+  /* 043 */
+  --bg1:#0c0c0e;
+  /* 044 */
+  --bg2:#050506;
+  /* 045 */
+  --bg3:#000000;
+  /* 046 */
+  --deep:#000000;
+  /* 047 */
+  --ink:#ffffff;
+  /* 048 */
+  --muted:#b9b9c0;
+  /* 049 */
+  --card:rgba(20,20,22,.60);
+  /* 050 */
+  --line:rgba(255,255,255,.14);
+  /* 051 */
+  --gold:#e8e8e8;
+  /* 052 */
+  --gold2:#ffffff;
+  /* 053 */
+  --aqua:#9aa0a6;
+  /* 054 */
+  --halo:radial-gradient(circle,rgba(255,255,255,.12) 0%,transparent 70%);
+  /* 055 */
+  --wave:#0a0a0c;
+  /* 056 */
+  --sand:0;
+  /* 057 */
+  --stars:1;
+  /* 058 */
+  --glow:rgba(255,255,255,.06);
+}
+/* NIGHT clean background — Figma flat black */
+body[data-theme="night"]{
+  background:
+    radial-gradient(1000px 480px at 50% 0%,rgba(255,255,255,.07),transparent 60%),
+    linear-gradient(180deg,#0e0e11 0%,#050506 42%,#000000 100%);
+}
+/* ============================================================
+  059-110: BASE
+============================================================= */
+/* 059 */
+*{margin:0;padding:0;box-sizing:border-box}
+/* 060 */
+html{scroll-behavior:smooth}
+/* 061: body paint — layered realistic sea light */
+body{
+  /* 062 */
+  font-family:var(--sans);font-weight:400;letter-spacing:.02em;color:var(--ink);
+  /* 063 */
+  background:
+    radial-gradient(1200px 600px at 80% -10%,var(--glow),transparent 60%),
+    radial-gradient(900px 500px at 10% 20%,rgba(255,255,255,.20),transparent 60%),
+    linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 38%,var(--bg3) 72%,var(--deep) 100%);
+  /* 064 */
+  min-height:100vh;overflow-x:hidden;transition:background .45s ease,color var(--tr);
+}
+/* 065: film grain — photo realism */
+body::after{
+  content:"";position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.06;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+/* 066: selection */
+::selection{background:var(--gold);color:#fff}
+/* 067 */
+img{max-width:100%;display:block}
+/* 068 */
+a{color:inherit;text-decoration:none}
+/* 069 */
+button{font-family:inherit}
+/* ============================================================
+  070-180: SKY — sun LIGHT.png / moon moon.png / clouds / birds
+============================================================= */
+/* 070 */
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+/* 071 */
+#stars{position:absolute;inset:0;opacity:var(--stars);transition:opacity var(--tr)}
+/* droplets canvas — day only */
+#drops{position:absolute;inset:0;opacity:0;transition:opacity var(--tr)}
+body[data-theme="day"] #drops{opacity:1}
+/* 072: SUN — your LIGHT.png, no background (screen blend) */
+.sun{
+  position:absolute;top:4%;left:4%;width:210px;height:210px;border-radius:50%;
+  background:url("LIGHT.png") center/contain no-repeat transparent;
+  mix-blend-mode:screen;
+  filter:drop-shadow(0 0 26px rgba(255,210,120,.9));
+  transition:opacity var(--tr),transform var(--tr);
+}
+/* DAY sun — Figma small fiery ball top-left */
+body[data-theme="day"] .sun{
+  top:14px;left:32px;width:120px;height:120px;
+  mix-blend-mode:normal;border-radius:50%;
+  filter:saturate(1.25) contrast(1.05);
+}
+body[data-theme="day"] .sun::after{display:none}
+body[data-theme="day"] .sunpath,body[data-theme="day"] .moonpath{display:none}
+/* DAY+NIGHT header — transparent wrapper, switch only (Figma) */
+body[data-theme="day"] .header,body[data-theme="night"] .header{
+  width:auto;justify-content:center;background:transparent;border:0;box-shadow:none;
+  backdrop-filter:none;padding:.4rem;
+}
+body[data-theme="day"] .logo,body[data-theme="day"] .cart,
+body[data-theme="night"] .logo,body[data-theme="night"] .cart{display:none}
+/* DAY clean — no sea / marquee / grain / cinematic */
+body[data-theme="day"] .sea,body[data-theme="day"] .marquee{display:none}
+body[data-theme="day"] .rays,body[data-theme="day"] .dust{opacity:0}
+body[data-theme="day"] .vignette{background:radial-gradient(120% 90% at 50% 40%,transparent 70%,rgba(20,80,110,.10) 100%)}
+body[data-theme="day"]::after{display:none}
+/* 073: sun lens streak */
+.sun::after{
+  content:"";position:absolute;top:50%;left:-160px;right:-160px;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+  filter:blur(1px);transform:rotate(-12deg);
+}
+/* 074: day shows sun */
+body[data-theme="day"] .sun{opacity:1;transform:none}
+/* 075: night hides sun */
+body[data-theme="night"] .sun{opacity:0;transform:translateY(140px)}
+/* 076: MOON — your moon.png, no background (screen blend) */
+.moon{
+  position:absolute;top:5%;left:5%;width:170px;height:170px;border-radius:50%;
+  background:url("moon.png") center/contain no-repeat transparent;
+  mix-blend-mode:screen;
+  filter:drop-shadow(0 0 22px rgba(200,215,255,.8));
+  opacity:0;transform:translateY(-70px);
+  transition:opacity var(--tr),transform var(--tr);overflow:hidden;
+}
+/* 077: moon craters come from moon.png image */
+/* 078: night shows moon */
+body[data-theme="night"] .moon{opacity:1;transform:none}
+/* 079: sun glitter path on sea (day) */
+.sunpath{
+  position:absolute;bottom:0;left:8%;width:130px;height:46%;
+  background:linear-gradient(180deg,rgba(255,240,180,.70),transparent 70%);
+  filter:blur(7px);clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);
+  animation:gl 3s ease-in-out infinite;
+}
+/* 080 */
+body[data-theme="night"] .sunpath{opacity:0}
+/* 081 */
+@keyframes gl{50%{opacity:.55}}
+/* 082: moon path on sea (night) */
+.moonpath{
+  position:absolute;bottom:0;left:8%;width:90px;height:46%;opacity:0;
+  background:linear-gradient(180deg,rgba(220,230,255,.55),transparent 70%);
+  filter:blur(6px);clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);
+  transition:opacity var(--tr);
+}
+/* 083 */
+body[data-theme="night"] .moonpath{opacity:1}
+/* 084: realistic clouds */
+.cloud{
+  position:absolute;background:linear-gradient(180deg,#ffffff,#e8f2f8);
+  border-radius:50px;opacity:.92;
+  box-shadow:0 10px 24px rgba(120,170,200,.35);
+  transition:opacity var(--tr);
+}
+/* 085 */
+.c1{top:9%;left:30%;width:190px;height:48px;animation:dr 16s ease-in-out infinite alternate}
+/* 086 */
+.c2{top:20%;left:12%;width:130px;height:36px;opacity:.70;animation:dr 21s ease-in-out infinite alternate-reverse}
+/* 087 */
+body[data-theme="night"] .cloud{opacity:0}
+/* 088 */
+@keyframes dr{to{transform:translateX(-46px)}}
+/* clouds removed — user request: no white pills */
+.cloud{display:none!important}
+/* 088b: BIRDS — day only, CSS seagulls flying across the sky */
+.birds{position:absolute;inset:0;opacity:0;transition:opacity var(--tr);overflow:hidden;pointer-events:none}
+body[data-theme="day"] .birds{opacity:1}
+body[data-theme="night"] .birds{opacity:0}
+.bird{position:absolute;left:-90px;width:38px;height:14px;animation:fly linear infinite}
+.bird i{position:absolute;top:0;width:21px;height:12px;border-top:3px solid rgba(25,65,90,.85);border-radius:50%}
+.bird i:first-child{left:0;transform-origin:right center;animation:wingL .55s ease-in-out infinite alternate}
+.bird i:last-child{right:0;transform-origin:left center;animation:wingR .55s ease-in-out infinite alternate}
+.b1{top:11%;animation-duration:19s;--s:1}
+.b2{top:19%;animation-duration:26s;animation-delay:5s;width:30px}
+.b3{top:7%;animation-duration:32s;animation-delay:11s;width:46px}
+.b3 i{border-top-width:4px}
+@keyframes fly{to{transform:translateX(120vw)}}
+@keyframes wingL{from{transform:rotate(-6deg)}to{transform:rotate(-36deg)}}
+@keyframes wingR{from{transform:rotate(6deg)}to{transform:rotate(36deg)}}
+/* ============================================================
+  089-150: HEADER + BALL SWITCH (right=sun day, left=moon night)
+============================================================= */
+/* 089 */
+.header{
+  position:sticky;top:12px;z-index:20;width:min(var(--max),94%);margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:.8rem;
+  background:var(--card);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;padding:.6rem .9rem;
+}
+/* 090 */
+.logo{font-family:var(--serif);font-size:1.3rem;letter-spacing:.10em}
+/* 091 */
+.logo small{display:block;font-family:var(--sans);font-size:.60rem;letter-spacing:.42em;color:var(--gold)}
+/* 092: retired single button */
+/* single toggle retired — ball switch below */
+/* 093: SLIDING SWITCH — knob slides right=sun day / left=moon night */
+.ball-switch{display:flex;align-items:center;border:0;background:transparent;cursor:pointer;font-family:var(--sans);padding:0}
+/* 094: track — compact pill, not long bar */
+.ball-track{
+  position:relative;width:176px;height:48px;border-radius:999px;
+  box-shadow:0 6px 24px rgba(0,0,0,.14);transition:background var(--tr);
+}
+/* 095 */
+.ball-switch[data-mode="day"] .ball-track{background:rgba(255,255,255,.78)}
+.ball-switch[data-mode="night"] .ball-track{background:#8d8d90}
+/* 096: knob base */
+.ball{
+  position:absolute;top:5px;left:5px;height:38px;min-width:126px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;padding:0 .9rem 0 .6rem;
+  font-size:.82rem;font-weight:700;letter-spacing:.08em;white-space:nowrap;
+  transition:left .55s cubic-bezier(.22,1,.36,1),background .5s,color .5s,box-shadow .5s;
+}
+/* 097 */
+.ball-ico{width:26px;height:26px;border-radius:50%;background:center/cover no-repeat;flex:none}
+/* 098: DAY — knob RIGHT + sun */
+.ball-switch[data-mode="day"] .ball{
+  left:calc(100% - 131px);background:linear-gradient(135deg,#f9c489,#e8993f);color:#1c1c1c;
+  box-shadow:0 4px 14px rgba(230,150,60,.55);flex-direction:row-reverse;padding:0 .6rem 0 .9rem;
+}
+.ball-switch[data-mode="day"] .ball-ico{background-image:url("LIGHT.png")}
+/* 099: NIGHT — knob LEFT + moon */
+.ball-switch[data-mode="night"] .ball{
+  left:5px;background:linear-gradient(135deg,#4b4b50,#2a2a2e);color:#f2f2f2;
+  box-shadow:0 4px 14px rgba(0,0,0,.50);
+}
+.ball-switch[data-mode="night"] .ball-ico{background-image:url("moon.png")}
+.ball-label{line-height:1}
+/* 100 */
+.cart{background:var(--ink);color:var(--bg1);border:0;border-radius:11px;padding:.55rem .95rem;font-weight:600;cursor:pointer}
+/* 101 */
+.cart:hover{transform:translateY(-2px)}
+/* ============================================================
+  102-260: HERO AD — EXOR wavy title BEHIND bottle
+============================================================= */
+/* 102 */
+.hero-ad{position:relative;z-index:1;min-height:88vh;display:grid;place-items:center;text-align:center;padding:2rem 4vw 0;overflow:hidden}
+/* 103: MEGA title behind */
+.mega{position:absolute;z-index:1;top:8%;left:50%;transform:translateX(-50%);width:100%;pointer-events:none;user-select:none;line-height:.9}
+/* 104: EXOR — big wavy font */
+.mega span{
+  display:block;font-family:var(--wavy);font-size:clamp(4rem,17vw,16rem);letter-spacing:.04em;
+  background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.15));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 20px 40px rgba(0,0,0,.25));
+}
+/* 105 */
+body[data-theme="night"] .mega span{background:linear-gradient(180deg,rgba(230,225,255,.95),rgba(120,110,255,.15));-webkit-background-clip:text;background-clip:text}
+/* 106 */
+.mega em{display:block;font-family:var(--it);font-style:italic;font-size:clamp(1.4rem,4vw,3rem);color:var(--gold2);text-shadow:0 4px 30px rgba(0,0,0,.40);margin-top:-.4em;letter-spacing:.18em}
+/* 107: middle row — stage + reviews */
+.hero-mid{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:2rem;width:100%}
+body[data-theme="night"] .hero-mid{flex-direction:column;gap:0}
+/* 108 */
+.stage{position:relative;z-index:2;width:min(430px,88vw);margin-top:7rem;margin-inline:auto}
+/* 109 */
+.halo{position:absolute;top:48%;left:50%;width:170%;aspect-ratio:1;transform:translate(-50%,-50%);background:var(--halo);border-radius:50%;animation:br 5s ease-in-out infinite;pointer-events:none}
+body[data-theme="day"] .halo{display:none!important}
+/* 110 */
+@keyframes br{50%{transform:translate(-50%,-50%) scale(1.07)}}
+/* 111 */
+.perfume{position:relative;display:none}
+/* 112 */
+.perfume.show{display:block;animation:rise .8s cubic-bezier(.22,1,.36,1)}
+/* 113 */
+@keyframes rise{from{opacity:0;transform:translateY(46px) scale(.94)}}
+/* 114 */
+.perfume img{width:100%;height:min(520px,60vh);object-fit:cover;object-position:50% 50%;position:relative;z-index:2;animation:flBoth 6s ease-in-out infinite;filter:drop-shadow(0 34px 30px rgba(0,0,0,.45))}
+#perfumeDay img,#perfumeNight img{transform:none;position:relative;margin:0 auto;left:0;width:100%;max-width:420px}
+@keyframes flBoth{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+/* 115 */
+@keyframes fl{50%{transform:translateY(-12px)}}
+/* 116 */
+.slot{position:absolute;inset:6px;z-index:1;display:none;place-content:center;border:2px dashed rgba(255,255,255,.70);border-radius:24px;background:rgba(255,255,255,.25);font-size:.85rem;padding:1rem;color:#0a4d68}
+/* 117 */
+.slot.dark{border-color:rgba(157,123,255,.80);background:rgba(10,18,45,.50);color:#dfe7ff}
+/* 118 */
+.mirror{width:64%;height:20px;margin:8px auto 0;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.45),transparent 70%);filter:blur(4px)}
+/* 118b: MOVABLE BOTTLE — stage tilts with mouse / drag */
+.stage{perspective:900px;touch-action:pan-y;cursor:grab}
+.stage:active{cursor:grabbing}
+.stage .tilt{transform:rotateX(var(--rx,0deg)) rotateZ(var(--rz,0deg));transition:transform .12s linear;transform-style:preserve-3d;will-change:transform}
+/* 118c: entrance reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+body.loaded .rv{opacity:1;transform:none}
+body.loaded .rv1{transition-delay:.05s}body.loaded .rv2{transition-delay:.18s}body.loaded .rv3{transition-delay:.32s}body.loaded .rv4{transition-delay:.45s}
+/* 119 */
+.tag{display:none;margin-top:.6rem;background:rgba(0,0,0,.55);color:#fff;border:1px solid rgba(255,255,255,.40);font-size:.70rem;letter-spacing:.20em;padding:.35rem .9rem;border-radius:999px;backdrop-filter:blur(8px)}
+/* ============================================================
+  120-170: REVIEWS — big, no box, no emojis, top-right of perfume
+============================================================= */
+/* 120 */
+.reviews-side{position:absolute;top:-10px;right:2%;z-index:5;background:transparent;border:0;box-shadow:none;padding:.5rem;text-align:center;min-width:0;animation:fl 7s ease-in-out infinite}
+/* 121: stars big gold */
+.reviews-side .big-stars{font-size:3.4rem;color:var(--gold);letter-spacing:.12em;line-height:1;text-shadow:0 4px 24px rgba(0,0,0,.40)}
+/* 122 */
+.reviews-side .score-row{display:flex;align-items:baseline;justify-content:center;gap:.6rem;margin-top:.2rem}
+/* 123: score in serif */
+.reviews-side .score{font-family:var(--serif);font-size:3rem;line-height:1}
+/* 124 */
+.reviews-side small{font-family:var(--sans);color:var(--muted);font-size:1.15rem;letter-spacing:.03em}
+/* ============================================================
+  125-160: CTA — big button centered directly under perfume
+============================================================= */
+/* 125 */
+.cta-row{position:relative;z-index:3;display:flex;margin-top:1.3rem;justify-content:center;align-items:center}
+/* 126 */
+.btn{font-weight:600;border:1px solid transparent;cursor:pointer;font-family:var(--sans);display:inline-flex;align-items:center;justify-content:center;gap:.5rem;text-align:center}
+/* 127: XL add to cart */
+.btn-xl{font-size:1.25rem;padding:1.15rem 3.2rem;border-radius:18px;letter-spacing:.04em;min-width:min(420px,84vw)}
+/* 128 */
+.btn-p{background:linear-gradient(135deg,var(--aqua),var(--gold));color:#fff;box-shadow:var(--sh1);position:relative;overflow:hidden}
+/* 129: shine sweep */
+.btn-p::after{content:"";position:absolute;top:0;bottom:0;width:60px;left:-80px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.75),transparent);transform:skewX(-20deg);animation:sh 3.2s ease-in-out infinite}
+/* 130 */
+@keyframes sh{0%,60%{left:-80px}100%{left:130%}}
+/* 131 */
+.btn-p:hover{transform:translateY(-2px)}
+/* ============================================================
+  132-200: SEA — realistic multi-wave + foam + sparkles + sand
+============================================================= */
+/* 132 */
+.sea{position:relative;z-index:1;margin-top:-30px;height:170px;overflow:hidden;background:linear-gradient(180deg,transparent 0 30%,var(--bg3) 32%,var(--deep))}
+/* 133 */
+.sea svg{position:absolute;left:0;width:200%;display:block}
+/* 134 */
+.w1{top:16px;height:86px;fill:var(--wave);opacity:.55;animation:sl 11s linear infinite}
+/* 135 */
+.w2{top:42px;height:104px;fill:var(--wave);animation:sl 7s linear infinite reverse}
+/* 136 */
+@keyframes sl{to{transform:translateX(-50%)}}
+/* 137: foam */
+.foam{position:absolute;top:66px;left:0;right:0;height:13px;background:radial-gradient(12px 8px at 20px 50%,#fff,transparent 70%) 0 0/90px 13px repeat-x;animation:sl 5s linear infinite}
+/* 138: sand */
+.sand{position:absolute;bottom:0;left:0;right:0;height:58px;background:linear-gradient(180deg,#fff6da,#e9cf90 45%,#c9a061);opacity:var(--sand);border-radius:50% 50% 0 0/24px 24px 0 0;box-shadow:inset 0 8px 14px rgba(255,255,255,.80)}
+/* ============================================================
+  139-160: MARQUEE copywriting + footer + vignette
+============================================================= */
+/* 139 */
+.marquee{overflow:hidden;white-space:nowrap;background:rgba(0,0,0,.40);color:#fff;border-block:1px solid rgba(255,255,255,.20);position:relative;z-index:1;backdrop-filter:blur(8px)}
+/* 140 */
+body[data-theme="day"] .marquee{background:rgba(255,255,255,.60);color:#0c2f44}
+/* 141 */
+.marquee div{display:inline-block;padding:.7rem 0;animation:mq 20s linear infinite;font-family:var(--serif);letter-spacing:.25em;font-size:.85rem}
+/* 142 */
+@keyframes mq{to{transform:translateX(-50%)}}
+/* 143 */
+.foot{text-align:center;padding:2rem 1rem 3rem;color:var(--muted);position:relative;z-index:1;font-size:.85rem}
+/* 144 */
+.vignette{position:fixed;inset:0;z-index:40;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%,transparent 60%,rgba(0,10,25,.38) 100%)}
+/* ============================================================
+  145-220: CINEMATIC extras — rays / dust / light-leak
+============================================================= */
+/* 145 */
+.rays{position:fixed;inset:-20%;z-index:0;pointer-events:none;opacity:.50;mix-blend-mode:soft-light;background:conic-gradient(from 180deg at 50% 0%,transparent 0 8deg,rgba(255,255,255,.50) 10deg,transparent 14deg,transparent 30deg,rgba(255,255,255,.40) 33deg,transparent 37deg);animation:ray 40s linear infinite}
+/* 146 */
+@keyframes ray{to{transform:rotate(6deg) scale(1.05)}}
+/* 147 */
+body[data-theme="night"] .rays{opacity:.18}
+/* 148 */
+.dust{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.80;background-image:radial-gradient(2px 2px at 12% 30%,#fff,transparent),radial-gradient(2px 2px at 68% 12%,#fff,transparent),radial-gradient(1.6px 1.6px at 82% 62%,#fff,transparent);animation:du 9s ease-in-out infinite alternate}
+/* 149 */
+@keyframes du{to{transform:translateY(-18px)}}
+/* 149b: SPOTLIGHT — soft light follows the cursor (desktop only) */
+.spot{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .6s;background:radial-gradient(340px 340px at var(--sx,50%) var(--sy,30%),rgba(255,255,255,.14),transparent 70%)}
+body[data-theme="night"] .spot{background:radial-gradient(380px 380px at var(--sx,50%) var(--sy,30%),rgba(180,200,255,.12),transparent 70%)}
+@media(pointer:fine){body.loaded .spot{opacity:1}}
+/* 149c: TITLE FLASH — shimmer sweep on the EXOR word when theme changes */
+.mega span.doflash{animation:doflash 1s ease}
+@keyframes doflash{0%{filter:brightness(1.8) saturate(1.3)}100%{filter:none}}
+/* 149d: MAGNETIC CTA — button leans toward the cursor (separate `translate` prop so entrance reveal keeps working) */
+.cta-row{translate:var(--mx,0px) var(--my,0px);transition:translate .18s ease-out}
+/* ============================================================
+  DAY HERO — Figma: EXOR left + description, bottle right
+============================================================= */
+.day-desc{display:none}
+body[data-theme="day"] .hero-ad{
+  display:flex;flex-direction:row;align-items:center;justify-content:center;
+  gap:2rem;text-align:left;
+  width:min(var(--max),94%);margin:0 auto;min-height:calc(100vh - 80px);padding:0 1vw 1rem;
+}
+body[data-theme="day"] .mega{
+  position:static;transform:none;width:auto;pointer-events:auto;user-select:text;
+  flex:1.15;align-self:center;line-height:1;
+}
+body[data-theme="day"] .mega span{
+  font-family:var(--serif);font-weight:400;font-size:clamp(4.6rem,10vw,11rem);
+  letter-spacing:.01em;color:#000;background:none;-webkit-background-clip:border-box;background-clip:border-box;
+  -webkit-text-fill-color:#000;filter:none;line-height:.95;
+}
+body[data-theme="night"] .mega em{display:none}
+body[data-theme="day"] .mega em{display:none}
+body[data-theme="day"] .day-desc{
+  display:block;font-family:var(--sans);font-weight:400;
+  font-size:clamp(.95rem,1.6vw,1.18rem);line-height:1.62;color:#0b1c26;
+  max-width:33rem;margin-top:1.1rem;letter-spacing:.01em;
+}
+body[data-theme="day"] .hero-mid{
+  flex:.85;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:static;width:auto;gap:0;
+}
+body[data-theme="day"] .stage{
+  order:2;margin:0;width:100%;max-width:420px;
+  display:flex;flex-direction:column;align-items:center;
+}
+/* bottle PNG centered — cover-crop side padding so DAY and NIGHT look same size */
+body[data-theme="day"] #perfumeDay img{
+  left:0;transform:none;
+  width:100%;max-width:420px;height:min(520px,60vh);
+  display:block;margin:0 auto;
+  object-fit:cover;object-position:50% 50%;
+  animation:flBoth 6s ease-in-out infinite;
+}
+@keyframes flDay{50%{transform:translateY(-10px)}}
+body[data-theme="day"] .mirror{
+  display:block;width:70%;height:22px;margin:2px auto 0;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(10,60,90,.35),transparent 70%);filter:blur(4px);
+}
+/* DAY reviews — small black stars + 4.9 above bottle */
+body[data-theme="day"] .reviews-side{
+  position:static;order:1;
+  display:flex;align-items:center;gap:.45rem;margin:0 0 .6rem;animation:none;padding:0;
+}
+body[data-theme="day"] .reviews-side .big-stars{
+  font-size:1rem;color:#000;letter-spacing:.28em;text-shadow:none;line-height:1;
+}
+body[data-theme="day"] .reviews-side .score-row{margin:0}
+body[data-theme="day"] .reviews-side .score{font-family:var(--sans);font-weight:500;font-size:.95rem}
+body[data-theme="day"] .reviews-side small{display:none}
+/* DAY CTA — brand blue pill, SAME metrics as night so both bottles share one size */
+body[data-theme="day"] .cta-row{order:3;margin-top:.45rem}
+body[data-theme="day"] .btn-xl{
+  min-width:230px;min-height:48px;font-size:1rem;font-weight:600;letter-spacing:.02em;text-transform:lowercase;
+  padding:.72rem 1.7rem;border-radius:999px;color:#fff;
+  background:linear-gradient(135deg,#3fb3dd,#1a7fa8);box-shadow:0 10px 22px rgba(20,110,150,.30);
+}
+body[data-theme="day"] .btn-p::after{display:none}
+body[data-theme="day"] .foot{display:none}
+/* DAY responsive — stack like Figma on mobile */
+@media(max-width:900px){
+  body[data-theme="day"] .hero-ad{display:flex;flex-direction:column;text-align:center;padding-top:.6rem}
+  body[data-theme="day"] .mega{order:1;text-align:center}
+  body[data-theme="day"] .mega span{font-size:clamp(3.4rem,18vw,6rem)}
+  body[data-theme="day"] .day-desc{margin-inline:auto;text-align:left;font-size:.98rem}
+  body[data-theme="day"] .hero-mid{display:flex;flex-direction:column;align-items:center;order:2}
+  body[data-theme="day"] .reviews-side{order:-1;margin:.8rem 0 .2rem}
+  body[data-theme="day"] .stage{max-width:min(340px,84vw)}
+  body[data-theme="day"] #perfumeDay img{height:min(440px,54vh)}
+  body[data-theme="day"] .cta-row{order:3;margin-top:.45rem}
+}
+/* ============================================================
+  NIGHT HERO — Figma black: EXOR white left, black bottle right
+============================================================= */
+body[data-theme="night"] .moon{top:14px;left:32px;width:120px;height:120px}
+body[data-theme="night"] .hero-ad{
+  display:flex;flex-direction:row;align-items:center;justify-content:center;
+  gap:2rem;text-align:left;
+  width:min(var(--max),94%);margin:0 auto;min-height:calc(100vh - 80px);padding:0 1vw 1rem;
+}
+body[data-theme="night"] .mega{
+  position:static;transform:none;width:auto;pointer-events:auto;user-select:text;
+  flex:1.15;align-self:center;line-height:1;
+}
+body[data-theme="night"] .mega span{
+  font-family:var(--serif);font-weight:400;font-size:clamp(4.6rem,10vw,11rem);
+  letter-spacing:.01em;color:#fff;background:none;-webkit-background-clip:border-box;background-clip:border-box;
+  -webkit-text-fill-color:#fff;filter:none;line-height:.95;
+}
+body[data-theme="night"] .mega em{display:none}
+body[data-theme="night"] .day-desc{
+  display:block;font-family:var(--sans);font-weight:400;
+  font-size:clamp(.95rem,1.6vw,1.18rem);line-height:1.62;color:#ededf0;
+  max-width:33rem;margin-top:1.1rem;letter-spacing:.01em;
+}
+body[data-theme="night"] .hero-mid{flex:.85;width:auto}
+body[data-theme="night"] .reviews-side{
+  position:static;order:1;display:flex;align-items:center;gap:.45rem;margin:0 0 .6rem;animation:none;padding:0;
+}
+body[data-theme="night"] .reviews-side .big-stars{font-size:1rem;color:#fff;letter-spacing:.28em;text-shadow:none;line-height:1}
+body[data-theme="night"] .reviews-side .score-row{margin:0}
+body[data-theme="night"] .reviews-side .score{font-family:var(--sans);font-weight:500;font-size:.95rem;color:#fff}
+body[data-theme="night"] .reviews-side small{display:none}
+body[data-theme="night"] .stage{order:2;margin:0;width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center}
+/* night bottle PNG has gray photo background — same cover-crop + feather mask to blend to black */
+body[data-theme="night"] #perfumeNight img{
+  left:0;transform:none;
+  width:100%;max-width:420px;height:min(520px,60vh);
+  object-fit:cover;object-position:50% 50%;
+  animation:flBoth 6s ease-in-out infinite;
+  -webkit-mask-image:radial-gradient(ellipse 82% 88% at 50% 50%,#000 62%,transparent 88%);
+  mask-image:radial-gradient(ellipse 82% 88% at 50% 50%,#000 62%,transparent 88%);
+}
+body[data-theme="night"] .halo{display:none!important}
+body[data-theme="night"] .mirror{
+  display:block;width:70%;height:22px;margin:2px auto 0;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,255,255,.22),transparent 70%);filter:blur(4px);
+}
+/* NIGHT CTA — gray pill like screenshot, SAME metrics as day so both bottles share one size */
+body[data-theme="night"] .cta-row{order:3;margin-top:.45rem}
+body[data-theme="night"] .btn-xl{
+  min-width:230px;min-height:48px;font-size:1rem;font-weight:600;letter-spacing:.02em;text-transform:lowercase;
+  padding:.72rem 1.7rem;border-radius:999px;color:#fff;
+  -webkit-text-stroke:1.3px #111;paint-order:stroke fill;
+  text-shadow:0 1px 0 rgba(0,0,0,.45);
+  background:linear-gradient(135deg,#9aa0a6,#7c8187);box-shadow:0 10px 22px rgba(0,0,0,.55);
+}
+body[data-theme="night"] .btn-p::after{display:none}
+/* NIGHT clean — no sea / marquee / footer / cinematic */
+body[data-theme="night"] .sea,body[data-theme="night"] .marquee,body[data-theme="night"] .foot,body[data-theme="night"] .moonpath,body[data-theme="night"] .sunpath{display:none!important}
+body[data-theme="night"] .rays,body[data-theme="night"] .dust{opacity:0}
+body[data-theme="night"]::after{display:none}
+body[data-theme="night"] .vignette{background:radial-gradient(120% 90% at 50% 40%,transparent 65%,rgba(0,0,0,.55) 100%)}
+/* NIGHT responsive — stack on mobile */
+@media(max-width:900px){
+  body[data-theme="night"] .hero-ad{display:flex;flex-direction:column;text-align:center;padding-top:.6rem}
+  body[data-theme="night"] .mega{text-align:center}
+  body[data-theme="night"] .mega span{font-size:clamp(3.4rem,18vw,6rem)}
+  body[data-theme="night"] .day-desc{margin-inline:auto;text-align:left;font-size:.98rem}
+  body[data-theme="night"] .hero-mid{align-items:center}
+  body[data-theme="night"] .stage{max-width:min(340px,84vw)}
+  body[data-theme="night"] #perfumeNight img{height:min(440px,54vh)}
+}
+/* ============================================================
+  150-260: RESPONSIVE precision (5 breakpoints)
+============================================================= */
+/* 150: tablets */
+@media(max-width:1024px){
+  /* 151 */
+  body[data-theme="night"] .mega span{font-size:clamp(3.6rem,16vw,12rem)}
+  /* 152 */
+  .reviews-side{right:0}
+}
+/* 153: small tablets — neutralized: day/night have their own 900px stacking above, don't override */
+@media(max-width:900px){
+  /* 154 */
+  .mega{top:auto}
+  /* 155 */
+  body[data-theme="day"] .stage,body[data-theme="night"] .stage{margin-top:0}
+  /* 156 */
+  .hero-mid{flex-direction:column}
+  /* 157 */
+  .reviews-side{position:static;order:3}
+  body[data-theme="day"] .reviews-side,body[data-theme="night"] .reviews-side{order:-1}
+}
+/* 158: phones */
+@media(max-width:600px){
+  /* 159 */
+  .header{flex-wrap:wrap;justify-content:center}
+  /* 160: sliding switch scales down */
+  .ball-track{width:164px;height:44px}
+  /* 161 */
+  .ball{min-width:114px;height:34px;font-size:.76rem}
+  /* 162 */
+  .ball-switch[data-mode="day"] .ball{left:calc(100% - 119px)}
+  /* 163 */
+  .btn-xl{min-width:92vw;font-size:1.1rem}
+  /* 164 */
+  .reviews-side .big-stars{font-size:2.6rem}
+}
+/* 165: tiny phones */
+@media(max-width:380px){
+  /* 166 */
+  .logo{font-size:1.1rem}
+  /* 167 */
+  .mega em{font-size:1.1rem}
+}
+/* 168: motion safety */
+@media(prefers-reduced-motion:reduce){
+  /* 169 */
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1!important;transform:none!important;translate:0 0!important}
+  .spot{display:none!important}
+  .stage{cursor:default}
+}
+</style>
+</head>
+<body data-theme="day">
+<!-- 170: cinematic layers -->
+<div class="rays" aria-hidden="true"></div>
+<!-- 171 -->
+<div class="dust" aria-hidden="true"></div>
+<!-- 172: sky -->
+<div class="sky" aria-hidden="true"><canvas id="stars"></canvas><canvas id="drops"></canvas><div class="sun"></div><div class="moon"></div><div class="sunpath"></div><div class="moonpath"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="birds" aria-hidden="true"><span class="bird b1"><i></i><i></i></span><span class="bird b2"><i></i><i></i></span><span class="bird b3"><i></i><i></i></span></div></div>
+<!-- 173: header -->
+<header class="header">
+  <!-- 174: logo -->
+  <div class="logo">EXOR<small>PARFUM</small></div>
+  <!-- 175: BALL SWITCH — right sun day / left moon night -->
+  <button class="ball-switch" id="themeToggle" data-mode="day" aria-pressed="true" aria-label="Toggle day night"><span class="ball-track"><span class="ball" id="ballKnob"><span class="ball-ico"></span><span class="ball-label" id="ballLabel">DAY</span></span></span></button>
+  <!-- 176: cart -->
+  <button class="cart" id="cartBtn">Cart · <span id="cartN">0</span></button>
+</header>
+<main>
+<!-- 177: AD HERO -->
+<section class="hero-ad" id="top">
+  <!-- 178: EXOR wavy title BEHIND bottle -->
+  <div class="mega rv rv1"><span id="megaWord">EXOR</span><em id="megaSub">cold · blue · forever</em><p class="day-desc" id="dayDesc">"EXOR isn't just a fragrance—it's your quiet dominance. A breathtaking surge of ocean coldness that transforms into a dark, hypnotic aura as the sun sets. Leaving an intense 12-hour trail, EXOR ensures your presence is felt long before you arrive, and remembered long after you leave."</p></div>
+  <!-- 179: middle -->
+  <div class="hero-mid">
+  <!-- 180: stage center -->
+  <div class="stage rv rv2" id="stage">
+    <!-- 181 -->
+    <div class="halo"></div>
+    <!-- 182: DAY perfume slot -->
+    <figure class="perfume show" id="perfumeDay">
+      <!-- 183 -->
+      <div class="tilt" id="tiltD"><img src="exorlight.png" alt="EXOR Day perfume bottle" onerror="this.style.display='none'" /></div>
+      <!-- 184 -->
+      <div class="slot">EXOR · <b>exorlight.png</b> loaded ✓</div>
+      <!-- 185 -->
+      <div class="mirror"></div>
+      <!-- 186 -->
+      <figcaption class="tag">DAY · SEA</figcaption>
+    </figure>
+    <!-- 187: NIGHT black slot -->
+    <figure class="perfume" id="perfumeNight">
+      <!-- 188 -->
+      <div class="tilt" id="tiltN"><img src="exornight.png" alt="EXOR Black night perfume bottle" onerror="this.style.display='none'" /></div>
+      <!-- 189 -->
+      <div class="slot dark">EXOR · <b>exornight.png</b> loaded ✓</div>
+      <!-- 190 -->
+      <div class="mirror"></div>
+      <!-- 191 -->
+      <figcaption class="tag">NIGHT · BLACK</figcaption>
+    </figure>
+  </div>
+  <!-- 192: BIG reviews top-right, no box, no emojis -->
+  <aside class="reviews-side rv rv3" aria-label="Customer reviews">
+    <!-- 193: stars -->
+    <div class="big-stars" id="starsRow">★★★★★</div>
+    <!-- 194: score + count -->
+    <div class="score-row"><span class="score" id="scoreNum">4.9</span><small>2,314 reviews</small></div>
+  </aside>
+  <!-- 195: CTA directly under perfume, centered -->
+  <div class="cta-row rv rv4">
+    <!-- 196 -->
+    <button class="btn btn-p btn-xl" id="addBtn" data-add="day">add to cart &#128722;</button>
+  </div>
+  </div>
+</section>
+<!-- 197: realistic sea -->
+<div class="sea" aria-hidden="true">
+  <!-- 198 -->
+  <svg class="w1" viewBox="0 0 2880 110" preserveAspectRatio="none"><path d="M0,60 C240,95 480,25 720,55 C960,85 1200,95 1440,50 C1680,20 1920,80 2160,65 C2400,50 2640,90 2880,55 L2880,110 L0,110 Z"/></svg>
+  <!-- 199 -->
+  <svg class="w2" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0,70 C260,110 520,30 780,62 C1040,94 1300,108 1560,60 C1820,25 2080,85 2340,72 C2520,64 2700,92 2880,60 L2880,120 L0,120 Z"/></svg>
+  <!-- 200 -->
+  <div class="foam"></div><div class="sand"></div>
+</div>
+<!-- 201: copywriting marquee -->
+<div class="marquee"><div>&nbsp;SMELL LIKE THE OCEAN · 12H THAT TURNS HEADS · ONE SPRAY, THEY REMEMBER YOU · FRESH BY DAY, DANGEROUS BY NIGHT ·&nbsp;SMELL LIKE THE OCEAN · 12H THAT TURNS HEADS · ONE SPRAY, THEY REMEMBER YOU · FRESH BY DAY, DANGEROUS BY NIGHT ·</div></div>
+</main>
+<!-- 202: footer -->
+<footer class="foot">EXOR PARFUM © 2026 — <small>SMELL LIKE THE OCEAN · 12H THAT TURNS HEADS</small></footer>
+<!-- 203 -->
+<div class="spot" aria-hidden="true"></div><div class="vignette"></div>
+<script>
+/* ============================================================
+   EXOR — SCRIPT INDEX
+   01 ELEMENTS  02 SKY (stars+meteors night / drops+birds day)
+   03 THEME SWITCH  04 CART  05 MOVABLE BOTTLE  06 LEGENDARY TOUCHES
+============================================================ */
+/* 204: ORGANIZED JS — 01 ELEMENTS */
+(function(){"use strict";
+/* 205: elements */
+var body=document.body,tg=document.getElementById("themeToggle"),
+/* 206 */
+pD=document.getElementById("perfumeDay"),pN=document.getElementById("perfumeNight"),
+/* 207 */
+mw=document.getElementById("megaWord"),ms=document.getElementById("megaSub"),
+/* 208 */
+cv=document.getElementById("stars"),cx=cv.getContext("2d"),S=[];
+/* 209: stars field */
+function size(){cv.width=innerWidth;cv.height=innerHeight;S=[];for(var i=0;i<110;i++)S.push({x:Math.random()*cv.width,y:Math.random()*cv.height*.7,r:Math.random()*1.6+.4,p:Math.random()*6.28,s:.01+Math.random()*.03,v:.05+Math.random()*.18});}
+/* 210 */
+addEventListener("resize",size);size();
+/* 211: METEOR SHOWER — twinkling stars + falling meteors (night only) */
+var MS=[];(function loop(){if(body.dataset.theme==="night"){cx.clearRect(0,0,cv.width,cv.height);cx.fillStyle="#fff";for(var i=0;i<S.length;i++){var s=S[i];s.p+=s.s;s.x-=s.v;if(s.x<-2)s.x=cv.width+2;cx.globalAlpha=.35+Math.abs(Math.sin(s.p))*.65;cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.28);cx.fill();}if(MS.length<3&&Math.random()<.012)MS.push({x:cv.width*.2+Math.random()*cv.width*.75,y:Math.random()*cv.height*.3,vx:6+Math.random()*5,vy:2+Math.random()*2.5});for(var j=MS.length-1;j>=0;j--){var m=MS[j],ex=m.x-m.vx*10,ey=m.y-m.vy*10,g=cx.createLinearGradient(m.x,m.y,ex,ey);g.addColorStop(0,"rgba(255,255,255,.95)");g.addColorStop(1,"rgba(255,255,255,0)");cx.globalAlpha=1;cx.strokeStyle=g;cx.lineWidth=2.5;cx.lineCap="round";cx.beginPath();cx.moveTo(m.x,m.y);cx.lineTo(ex,ey);cx.stroke();cx.fillStyle="#fff";cx.beginPath();cx.arc(m.x,m.y,2.4,0,6.28);cx.fill();m.x+=m.vx;m.y+=m.vy;if(m.x>cv.width+140||m.y>cv.height+140)MS.splice(j,1);}cx.globalAlpha=1;}requestAnimationFrame(loop);})();
+/* 211b: falling droplets (day only) */
+var dc=document.getElementById("drops"),dx=dc.getContext("2d"),D=[];
+function dsize(){dc.width=innerWidth;dc.height=innerHeight;D=[];for(var i=0;i<70;i++)D.push({x:Math.random()*dc.width,y:Math.random()*dc.height,l:10+Math.random()*22,s:2+Math.random()*4,o:.12+Math.random()*.30});}
+addEventListener("resize",dsize);dsize();
+(function dloop(){if(body.dataset.theme==="day"){dx.clearRect(0,0,dc.width,dc.height);dx.lineCap="round";dx.lineWidth=2;for(var i=0;i<D.length;i++){var d=D[i];d.y+=d.s;d.x-=.4;if(d.y>dc.height+30){d.y=-30;d.x=Math.random()*(dc.width+100);}dx.strokeStyle="rgba(20,120,170,"+d.o+")";dx.beginPath();dx.moveTo(d.x,d.y);dx.lineTo(d.x+2,d.y+d.l);dx.stroke();}}requestAnimationFrame(dloop);})();
+/* 212: 03 THEME SWITCH — EXOR always, unified rating */
+var C={day:{w:"EXOR",s:"cold · blue · forever",t:"DAY",st:"★★★★★",sc:"4.9",btn:"add to cart \uD83D\uDED2"},
+/* 213 */
+night:{w:"EXOR",s:"black · deep · endless",t:"NIGHT",st:"★★★★★",sc:"4.9",btn:"add to cart \uD83D\uDED2"}};
+/* 214: set theme — ball right sun day / left moon night */
+function set(m){body.dataset.theme=m;var d=m==="day";pD.classList.toggle("show",d);pN.classList.toggle("show",!d);var o=C[m];mw.textContent=o.w;mw.classList.remove("doflash");void mw.offsetWidth;mw.classList.add("doflash");ms.textContent=o.s;tg.setAttribute("data-mode",m);tg.setAttribute("aria-pressed",String(d));document.getElementById("ballLabel").textContent=o.t;document.getElementById("starsRow").textContent=o.st;document.getElementById("scoreNum").textContent=o.sc;var ab=document.getElementById("addBtn");if(ab)ab.textContent=o.btn;try{localStorage.setItem("exor-theme",m);}catch(e){}}
+/* 215 */
+tg.onclick=function(){set(body.dataset.theme==="day"?"night":"day");};
+/* 216: restore (migrate old erox-theme key) */
+try{var sv=localStorage.getItem("exor-theme")||localStorage.getItem("erox-theme");set(sv==="night"?"night":"day");}catch(e){set("day");}
+/* 217: 04 CART */
+var n=0,cn=document.getElementById("cartN");
+/* 218 */
+document.querySelectorAll("[data-add]").forEach(function(b){b.addEventListener("click",function(){n++;cn.textContent=n;var ok=b.textContent;b.textContent="Added \u2713";setTimeout(function(){b.textContent=(body.dataset.theme==="day")?C.day.btn:C.night.btn;},1200);});});
+/* 219 */
+document.getElementById("cartBtn").onclick=function(){alert("Cart: "+n+" item(s)");};
+/* 220: 05 MOVABLE BOTTLE — drag / hover tilts the bottle, nothing else */
+requestAnimationFrame(function(){document.body.classList.add("loaded");});
+(function(){
+var stage=document.getElementById("stage"),reduce=false;
+try{reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}
+if(!stage||reduce)return;
+var fine=true;try{fine=matchMedia("(pointer: fine)").matches;}catch(e){}
+var tx=0,ty=0,cx=0,cy=0,drag=false,sx=0;
+function activeTilt(){var t=body.dataset.theme==="day"?document.getElementById("tiltD"):document.getElementById("tiltN");return t;}
+function loop(){
+ cx+=(tx-cx)*.08; cy+=(ty-cy)*.08;
+ var el=activeTilt();
+ if(el){el.style.setProperty("--rx",(-cy*10).toFixed(2)+"deg");el.style.setProperty("--rz",(cx*14).toFixed(2)+"deg");}
+ requestAnimationFrame(loop);
+}
+loop();
+function fromEvent(e,r){return {x:((e.clientX-r.left)/r.width-.5)*2,y:((e.clientY-r.top)/r.height-.5)*2};}
+if(fine){
+ stage.addEventListener("pointermove",function(e){if(drag)return;var r=stage.getBoundingClientRect(),p=fromEvent(e,r);tx=Math.max(-1,Math.min(1,p.x));ty=Math.max(-1,Math.min(1,p.y));});
+ stage.addEventListener("pointerleave",function(){if(!drag){tx=0;ty=0;}});
+}
+stage.addEventListener("pointerdown",function(e){drag=true;sx=e.clientX;stage.setPointerCapture&&stage.setPointerCapture(e.pointerId);});
+stage.addEventListener("pointermove",function(e){if(!drag)return;tx=Math.max(-1,Math.min(1,(e.clientX-sx)/160+tx*0.2));});
+function end(){drag=false;tx=0;ty=0;}
+stage.addEventListener("pointerup",end);stage.addEventListener("pointercancel",end);
+})();
+/* 221 */
+/* tilt replaces old fixed-center parallax */
+/* 223: 06 LEGENDARY TOUCHES — spotlight, magnetic CTA, shortcuts */
+(function(){
+try{
+if(!matchMedia("(pointer: fine)").matches)return;
+if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+}catch(e){return;}
+var busy=false;
+addEventListener("pointermove",function(e){
+var x=(e.clientX/innerWidth*100).toFixed(2)+"%",y=(e.clientY/innerHeight*100).toFixed(2)+"%";
+if(busy)return;busy=true;
+requestAnimationFrame(function(){
+document.body.style.setProperty("--sx",x);document.body.style.setProperty("--sy",y);
+var b=document.getElementById("addBtn");
+if(b){var q=b.getBoundingClientRect(),dx=e.clientX-(q.left+q.width/2),dy=e.clientY-(q.top+q.height/2);
+if(Math.hypot(dx,dy)<170){var row=b.closest(".cta-row");if(row){row.style.setProperty("--mx",(dx*.12).toFixed(1)+"px");row.style.setProperty("--my",(dy*.12).toFixed(1)+"px");}}}
+busy=false;});
+},{passive:true});
+document.addEventListener("pointerleave",function(){var b=document.getElementById("addBtn"),row=b&&b.closest(".cta-row");if(row){row.style.setProperty("--mx","0px");row.style.setProperty("--my","0px");}});
+document.addEventListener("keydown",function(e){if((e.key==="t"||e.key==="T")&&!e.ctrlKey&&!e.metaKey){var t=document.getElementById("themeToggle");if(t)t.click();}});
+var st=document.getElementById("stage");
+if(st)st.addEventListener("dblclick",function(){var t=document.getElementById("themeToggle");if(t)t.click();});
+})();
+/* 224: year-safe + done */
+})();
+</script>
+</body>
+</html>
